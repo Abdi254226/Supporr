@@ -1,2 +1,2 @@
-# Supporr
+# Support 
 Welcome every one
