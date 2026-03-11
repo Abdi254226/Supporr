@@ -1,0 +1,54 @@
+```xml
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:id="@+id/videoStream"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/playButton"
+        android:text="Play Game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="20dp"/>
+</FrameLayout>
+```
+```java
+package com.astura.cloudgaming;
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.VideoView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    VideoView videoView;
+    Button playButton;
+
+    String GAME_STREAM = "http://YOUR_SERVER_IP:8080/gta5.m3u8";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        videoView = findViewById(R.id.videoStream);
+        playButton = findViewById(R.id.playButton);
+
+        playButton.setOnClickListener(v -> {
+            Uri uri = Uri.parse(GAME_STREAM);
+            videoView.setVideoURI(uri);
+            videoView.start();
+        });
+    }
+}
+```
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+```
